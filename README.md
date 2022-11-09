@@ -41,8 +41,11 @@ Index of how many times the player won the game. Starts at 0
 Index of the land the player is in
 
 LinearLand = 1
+
 Non-LinearLand = 2
+
 SwitchingLand = 3
+
 QuantizedLand = 4
 
 ### level :
