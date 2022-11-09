@@ -55,14 +55,18 @@ Index of the system the player is in, on the land. Starts at 1 and ends at 4.
 OBS.: The equations for each level are:
 
 LinearLand:
+
 ![LinearLand](imgs/l1.png)
 
 non-LinearLand:
+
 ![non-LinearLand](imgs/l2.png)
 
 SwitchingLand:
+
 ![SwitchingLand](imgs/l3.png)
 
 QuantizedLand:
+
 ![QuantizedLand](imgs/l4.png)
 
