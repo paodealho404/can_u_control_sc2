@@ -35,7 +35,7 @@ class Server:
 
 				# get game data from the game (store it to compute next control signal)
 				self.received = (await websocket.recv()).split(',')
-				print(self.received) if self.verbose else None
+				# print(self.received) if self.verbose else None
 
 			except:
 				print('System not active...') if self.verbose else None
