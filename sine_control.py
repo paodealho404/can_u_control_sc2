@@ -84,21 +84,31 @@ class Control:
                 if land == 1:
                     filterU = 0.65
                     uMax = 1
+                    uMin = -1
+                    n = 100
                     if level == 3 or level == 4:
                         filterU = 0.35
                     
                 elif land == 2:
                     filterU = 0.65
                     uMax = 1
+                    uMin = -1
+                    n = 100
                 elif land == 3:
                     filterU = 0.45
                     uMax = 1
-                    if level == 3 or land == 4:
-                        uMax = 0
+                    uMin = -1
+                    n = 100
+                    if level == 3:
+                        uMax = -0.55
+                    elif level == 4:
+                        uMin = 0
                         
                 elif land == 4:
                     filterU = 0.7
                     uMax = 1
+                    uMin = -1
+                    n = 100
                     if level == 3:
                         filterU = 0.3
                 else:
