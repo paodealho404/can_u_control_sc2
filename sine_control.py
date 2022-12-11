@@ -6,9 +6,9 @@ from lands_functions import *
 
 # controlSignal = 0.00
 uMax = 1
-dt = 0.02
+dt = 0.01
 filterU = 0.45
-
+n = 100
 class Control:
 
     def __init__(self, verbose = False):
@@ -16,6 +16,7 @@ class Control:
         self.verbose = verbose
         self.time = 0.0
         self.controlSignal = 0.0
+        self.previousReceived = []
 
     def constrain(self, val, min_val, max_val):
         return max(min(val, max_val), min_val)
@@ -77,16 +78,34 @@ class Control:
     def step(self, received):
         if received:
             try:
+                print(received)
                 land, level = received[1], received[2]
+                if land == 1:
+                    filterU = 0.65
+                    if level == 3 or level == 4:
+                        filterU = 0.35
+                elif land == 3:
+                    filterU = 0.7
+                elif land == 4:
+                    filterU = 0.7
+                    if level == 3:
+                        filterU = 0.95
+                else:
+                    filterU = 0.65
                 player_x, player_y = received[3], received[4]
                 target_x, target_y = received[5], received[6]
 
-                self.controlSignal = filterU*self.controlSignal + (1.0 - filterU)*self.computeBestU(player_x, player_y, land, level, 100, 2*dt, target_x, target_y)
-                
-                self.controlSignal = self.constrain(self.controlSignal, -uMax, uMax)
+                if self.previousReceived != received:
+                    self.controlSignal = filterU*self.controlSignal + (1.0 - filterU)*self.computeBestU(player_x, player_y, land, level, n, 2*dt, target_x, target_y)
+                    
+                    self.controlSignal = self.constrain(self.controlSignal, -uMax, uMax)
+                else:
+                    self.controlSignal = 0
                 
                 self.time += dt
 
+                self.previousReceived = received
+                
                 return self.controlSignal
         
             except Exception:
