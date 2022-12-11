@@ -5,6 +5,7 @@ import numpy as np
 from lands_functions import *
 
 # controlSignal = 0.00
+uMin = -1
 uMax = 1
 dt = 0.01
 filterU = 0.45
@@ -82,14 +83,24 @@ class Control:
                 land, level = received[1], received[2]
                 if land == 1:
                     filterU = 0.65
+                    uMax = 1
                     if level == 3 or level == 4:
                         filterU = 0.35
+                    
+                elif land == 2:
+                    filterU = 0.65
+                    uMax = 1
                 elif land == 3:
-                    filterU = 0.7
+                    filterU = 0.45
+                    uMax = 1
+                    if level == 3 or land == 4:
+                        uMax = 0
+                        
                 elif land == 4:
                     filterU = 0.7
+                    uMax = 1
                     if level == 3:
-                        filterU = 0.95
+                        filterU = 0.3
                 else:
                     filterU = 0.65
                 player_x, player_y = received[3], received[4]
@@ -98,7 +109,8 @@ class Control:
                 if self.previousReceived != received:
                     self.controlSignal = filterU*self.controlSignal + (1.0 - filterU)*self.computeBestU(player_x, player_y, land, level, n, 2*dt, target_x, target_y)
                     
-                    self.controlSignal = self.constrain(self.controlSignal, -uMax, uMax)
+                    self.controlSignal = self.constrain(self.controlSignal, uMin, uMax)
+                                     
                 else:
                     self.controlSignal = 0
                 
