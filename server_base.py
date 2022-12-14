@@ -39,8 +39,7 @@ class Server:
 
 			except:
 				print('System not active...') if self.verbose else None
-				break;
-
+				break
 
 	def run(self):
 

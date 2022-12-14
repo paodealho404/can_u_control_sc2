@@ -3,6 +3,7 @@ from server_base import Server
 import numpy as np
 
 from lands_functions import *
+from lands_parameters import *
 
 # controlSignal = 0.00
 uMin = -1
@@ -10,6 +11,7 @@ uMax = 1
 dt = 0.01
 filterU = 0.45
 n = 100
+
 class Control:
 
     def __init__(self, verbose = False):
@@ -80,39 +82,10 @@ class Control:
         if received:
             try:
                 print(received)
-                land, level = received[1], received[2]
-                if land == 1:
-                    filterU = 0.65
-                    uMax = 1
-                    uMin = -1
-                    n = 100
-                    if level == 3 or level == 4:
-                        filterU = 0.35
-                    
-                elif land == 2:
-                    filterU = 0.65
-                    uMax = 1
-                    uMin = -1
-                    n = 100
-                elif land == 3:
-                    filterU = 0.45
-                    uMax = 1
-                    uMin = -1
-                    n = 100
-                    if level == 3:
-                        uMax = -0.55
-                    elif level == 4:
-                        uMin = 0
-                        
-                elif land == 4:
-                    filterU = 0.7
-                    uMax = 1
-                    uMin = -1
-                    n = 100
-                    if level == 3:
-                        filterU = 0.3
-                else:
-                    filterU = 0.65
+
+                land,level = received[1], received[2]
+                uMax, uMin, filterU, n = landsParameters(received[1], received[2])
+
                 player_x, player_y = received[3], received[4]
                 target_x, target_y = received[5], received[6]
 

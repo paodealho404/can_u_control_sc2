@@ -1,6 +1,39 @@
 from math import *
 import numpy as np
 
+def landsParameters(land, level):
+  uMax = 1
+  uMin = -1
+  n = 100
+
+  # LinearLand
+  if land == 1:
+    filterU = 0.65
+    if level == 3 or level == 4:
+      filterU = 0.35
+  # Non-linearLand
+  elif land == 2:
+    filterU = 0.65
+    if level == 4:
+      filterU = 0.35
+  # SwitchingLand
+  elif land == 3:
+    filterU = 0.45
+    if level == 2 or level == 3:
+      uMax = 0.55
+      uMin = -0.55
+    elif level == 4:
+      uMin = -0.20
+  # QuantizedLand
+  elif land == 4:
+    filterU = 0.7
+    if level == 3:
+      filterU = 0.2
+      uMax = 0.55
+      uMin = -0.55
+  
+  return uMax, uMin, filterU, n
+
 def landsFunctions(land, level, x, y, u):
   
   # LinearLand
