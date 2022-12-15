@@ -1,72 +1,37 @@
 # Can U Control
 
-# Files:
+# Arquivos:
 
-## server_base.py
+## bonus_control.py
 
-Main server class code. This class should not be modified. Controllers should just instanciate the `server`class passing a controller and call run.
+Código que utiliza o selenium para "roubar" no jogo, interagindo diretamente com o javascript da página (apenas para diversão). Caso deseje utilizar, executar os seguintes passos:
 
-## sin_server.py
+- Rodar `pip install selenium` (somente na primeira vez)
+- Rodar `python .\bonus_control.py`
 
-Demo file that creates a dummy controller and instanciates a server. The controller just keeps printing the received values and sends a sinusoidal control signal.
+A página do Can U Control será aberta automaticamente. Sente e busque uma pipoca B)
 
-## hardware_control.py
+## compute_functions.py
 
-Demo file that connects to an Arduino via serial and gets control signals from it. Normally the Arduino code should generate a control signal (for instance from a potentiometer) and send via serial as text. The controller then sends this value to the game as input.
+Arquivo que contém o código que controla o jogo, as funções que determinam os sinais de controle enviados estão aqui.
 
-## arduino_usb_serial
+## control.py
 
-simple Arduino code for sending AD values to serial
+Código principal que deve ser executado para rodar o controlador. Caso deseje utilizar, executar os seguintes passos:
 
-# Message formats (websocket)
+- Acessar o site do [Can U Control ](https://dev-mind.blog/apps/CanUControl/level.html)
+- Clicar no ícone do mouse na parte inferior até que se torne um "plugue" de tomada
+- Rodar `pip install numpy` (somente na primeira vez)
+- Rodar `pip install websockets` (somente na primeira vez)
+- Rodar `pip install asyncio` (somente na primeira vez)
+- Rodar `python .\control.py`
 
-## control value
+Ao clicar em play o personagem deve ser controlado pelo controlador aqui implementado
 
-Controller must send a value in text format between -1 and 1
+## lands_functions.py
 
-## sensor value
+Arquivo que contém a implementação das funções de cada um dos níveis.
 
-The controller receives (from the server) a list of ascii values with the following format:
+## lands_parameters.py
 
-[game, land, level, character_x, character_y, target_x, target_y, bonus_1_x, bonus_1_y,  bonus_2_x, bonus_2_y, bonus_3_x, bonus_3_y ] + [skull_1_x, skull_1_y, ... ]
-
-Obs: The second list might contain only an empty string if there are no skulls in the level. Otherwise it will contain the x,y values for each skull
-
-### game :
-
-Index of how many times the player won the game. Starts at 0
-
-### land :
-
-Index of the land the player is in
-
-LinearLand = 1
-
-Non-LinearLand = 2
-
-SwitchingLand = 3
-
-QuantizedLand = 4
-
-### level :
-
-Index of the system the player is in, on the land. Starts at 1 and ends at 4.
-
-OBS.: The equations for each level are:
-
-LinearLand:
-
-![LinearLand](imgs/l1.png)
-
-non-LinearLand:
-
-![non-LinearLand](imgs/l2.png)
-
-SwitchingLand:
-
-![SwitchingLand](imgs/l3.png)
-
-QuantizedLand:
-
-![QuantizedLand](imgs/l4.png)
-
+Arquivo que contém os parâmetros refinados para cada nível.
