@@ -1,5 +1,16 @@
 # Can U Control
 
+Desafio da disciplina de Sistemas de Controle 2, sob orientação do  Prof. Ícaro Bezerra Queiroz de Araújo.
+
+### Alunos:
+- José Ferreira Leite Neto (19111153)
+
+- Lilian Giselly Pereira Santos (19111115)
+
+- Lucas Lemos Cerqueira de Freitas (19111116)
+
+- Pedro Henrique de Brito Nascimento (19111287)
+
 # Arquivos:
 
 ## bonus_control.py
